@@ -30,9 +30,12 @@ class MainActivity : AppCompatActivity() {
 
         // Enable JavaScript
         val webSettings: WebSettings = webView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.domStorageEnabled = true
-        webSettings.databaseEnabled = true
+        webSettings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            databaseEnabled = true
+        }
+
 
         // set a WebViewClient to handle page navigation
         webView.webViewClient = WebViewClient()
