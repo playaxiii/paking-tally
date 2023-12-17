@@ -10,15 +10,13 @@ import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
 
-    private val splashDelay = 2000L // 2 seconds in milliseconds
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
         //Launch splash screen
         lifecycleScope.launch {
-            delay(splashDelay)
+            delay(2000L)
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }

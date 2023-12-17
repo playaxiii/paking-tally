@@ -1,5 +1,6 @@
 package com.axiii.parkingtally.view
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.axiii.parkingtally.R
 import com.axiii.parkingtally.databinding.ActivityMainBinding
 import com.axiii.parkingtally.model.JavaScriptInterface
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -75,11 +78,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Override onBackPressed to handle webView navigation
-    override fun onBackPressed() {
-        if (binding.webView.canGoBack()) {
-            binding.webView.goBack()
-        } else {
-            super.onBackPressed()
-        }
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override
+
+            fun handleOnBackPressed() {
+                if (binding.webView.canGoBack()) {
+                    binding.webView.goBack()
+                } else {
+                    finish()
+                }
+            }
+        })
     }
 }

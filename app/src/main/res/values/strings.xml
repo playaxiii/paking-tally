@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Parking Tally</string>
+    <string name="error_message">Error handling download</string>
 </resources>
